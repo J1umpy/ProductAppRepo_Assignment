@@ -1,0 +1,109 @@
+{
+  "info": {
+    "_postman_id": "17498f13-57c7-4687-b5fd-1878f3712ce1",
+    "name": "productsapp-automation",
+    "description": "### Welcome to Postman! This is your first collection. \n\nCollections are your starting point for building and testing APIs. You can use this one to:\n\n• Group related requests\n• Test your API in real-world scenarios\n• Document and share your requests\n\nUpdate the name and overview whenever you’re ready to make it yours.\n\n[Learn more about Postman Collections.](https://learning.postman.com/docs/collections/collections-overview/)",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "53655001"
+  },
+  "item": [
+    {
+      "name": "Get All Products",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "var jsonData = pm.response.json();\r",
+              "//Check and Verify values of .id\r",
+              "pm.test(\"Check that the first product ID is 1\", () => {pm.expect(jsonData[0].Id).to.equal(1)});\r",
+              "pm.test(\"Check that the second product ID is 2\", () => {pm.expect(jsonData[1].Id).to.equal(2)});\r",
+              "pm.test(\"Check that the third product ID is 3\", () => {pm.expect(jsonData[2].Id).to.equal(3)});\r",
+              "\r",
+              "//Check and Verify HTTP status code\r",
+              "pm.test(\"Status code is 200\", () => {pm.response.to.have.status(200)});\r",
+              "\r",
+              ""
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "https://localhost:44391/api/products",
+          "protocol": "https",
+          "host": [
+            "localhost"
+          ],
+          "port": "44391",
+          "path": [
+            "api",
+            "products"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get All Products 2nd Endpoint",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "//Parse JSON response to allow Postman to read it\r",
+              "var jsonData = pm.response.json();\r",
+              "\r",
+              "//Test 1-4: Check all 4 variables for Hammer\r",
+              "pm.test(\"Check that Id is 3\", () => { pm.expect(jsonData.Id).to.equal(3); });\r",
+              "pm.test(\"Check that Name is Hammer\", () => { pm.expect(jsonData.Name).to.equal(\"Hammer\"); });\r",
+              "pm.test(\"Check that Category is Hardware\", () => { pm.expect(jsonData.Category).to.equal(\"Hardware\"); });\r",
+              "pm.test(\"Check that Price is 16.99\", () => { pm.expect(jsonData.Price).to.equal(16.99); });\r",
+              "\r",
+              "//Test 5: Check and Verify HTTP status code\r",
+              "pm.test(\"Status code is 200\", () => {pm.response.to.have.status(200)});\r",
+              ""
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        },
+        {
+          "listen": "prerequest",
+          "script": {
+            "exec": [
+              ""
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "https://localhost:44391/api/products/3",
+          "protocol": "https",
+          "host": [
+            "localhost"
+          ],
+          "port": "44391",
+          "path": [
+            "api",
+            "products",
+            "3"
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}

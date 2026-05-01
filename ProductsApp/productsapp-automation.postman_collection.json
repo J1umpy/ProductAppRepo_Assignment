@@ -14,15 +14,39 @@
           "listen": "test",
           "script": {
             "exec": [
+              "//Parse JSON response to allow Postman to read it\r",
               "var jsonData = pm.response.json();\r",
-              "//Check and Verify values of .id\r",
-              "pm.test(\"Check that the first product ID is 1\", () => {pm.expect(jsonData[0].Id).to.equal(1)});\r",
-              "pm.test(\"Check that the second product ID is 2\", () => {pm.expect(jsonData[1].Id).to.equal(2)});\r",
-              "pm.test(\"Check that the third product ID is 3\", () => {pm.expect(jsonData[2].Id).to.equal(3)});\r",
               "\r",
               "//Check and Verify HTTP status code\r",
-              "pm.test(\"Status code is 200\", () => {pm.response.to.have.status(200)});\r",
+              "pm.test(\"Status code is 200\", () => { pm.response.to.have.status(200); });\r",
               "\r",
+              "//Check and Verify values of first product\r",
+              "pm.test(\"Check that first product ID is 1\", () => { pm.expect(jsonData[0].Id).to.equal(1); });\r",
+              "pm.test(\"Check that first product Name is Tomato\", () => { pm.expect(jsonData[0].Name).to.equal(\"Tomato\"); });\r",
+              "pm.test(\"Check that first product Category is Fruit\", () => { pm.expect(jsonData[0].Category).to.equal(\"Fruit\"); });\r",
+              "pm.test(\"Check that first product Price is 5\", () => { pm.expect(jsonData[0].Price).to.equal(5); });\r",
+              "\r",
+              "//Check and Verify values of second product\r",
+              "pm.test(\"Check that second product ID is 2\", () => { pm.expect(jsonData[1].Id).to.equal(2); });\r",
+              "pm.test(\"Check that second product Name is Wolf\", () => { pm.expect(jsonData[1].Name).to.equal(\"Wolf\"); });\r",
+              "pm.test(\"Check that second product Category is Spice\", () => { pm.expect(jsonData[1].Category).to.equal(\"Spice\"); });\r",
+              "pm.test(\"Check that second product Price is 86\", () => { pm.expect(jsonData[1].Price).to.equal(86); });\r",
+              "\r",
+              "//Check and Verify values of third product\r",
+              "pm.test(\"Check that third product ID is 3\", () => { pm.expect(jsonData[2].Id).to.equal(3); });\r",
+              "pm.test(\"Check that third product Name is Humvee\", () => { pm.expect(jsonData[2].Name).to.equal(\"Humvee\"); });\r",
+              "pm.test(\"Check that third product Category is Car\", () => { pm.expect(jsonData[2].Category).to.equal(\"Car\"); });\r",
+              "pm.test(\"Check that third product Price is 86.86\", () => { pm.expect(jsonData[2].Price).to.equal(86.86); });"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        },
+        {
+          "listen": "prerequest",
+          "script": {
+            "exec": [
               ""
             ],
             "type": "text/javascript",
@@ -50,7 +74,7 @@
       "response": []
     },
     {
-      "name": "Get All Products 2nd Endpoint",
+      "name": "Get All Products 3rd Endpoint",
       "event": [
         {
           "listen": "test",
@@ -59,14 +83,16 @@
               "//Parse JSON response to allow Postman to read it\r",
               "var jsonData = pm.response.json();\r",
               "\r",
-              "//Test 1-4: Check all 4 variables for Hammer\r",
+              "//Check and Verify HTTP status code\r",
+              "pm.test(\"Status code is 200\", () => {pm.response.to.have.status(200)});\r",
+              "\r",
+              "//// Check and Verify values of third product\r",
               "pm.test(\"Check that Id is 3\", () => { pm.expect(jsonData.Id).to.equal(3); });\r",
               "pm.test(\"Check that Name is Humvee\", () => { pm.expect(jsonData.Name).to.equal(\"Humvee\"); });\r",
               "pm.test(\"Check that Category is Car\", () => { pm.expect(jsonData.Category).to.equal(\"Car\"); });\r",
               "pm.test(\"Check that Price is 86.86\", () => { pm.expect(jsonData.Price).to.equal(86.86); });\r",
               "\r",
-              "//Test 5: Check and Verify HTTP status code\r",
-              "pm.test(\"Status code is 200\", () => {pm.response.to.have.status(200)});\r",
+              "\r",
               ""
             ],
             "type": "text/javascript",
